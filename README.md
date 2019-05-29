@@ -3,9 +3,9 @@
 
 GpuInstance合批的可摆动的草,支持设置草颜色
 
-![1](image\1.png)
+![1](image/1.png)
 
-![2](image\2.png)
+![2](image/2.png)
 
 ## demo使用
 
