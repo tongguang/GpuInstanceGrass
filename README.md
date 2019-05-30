@@ -1,7 +1,7 @@
 # GpuInstanceGrass
 ## 介绍
 
-GpuInstance合批的可摆动的草,支持设置草颜色
+unity GpuInstance合批的可摆动的草,支持设置草颜色
 
 ![1](image/1.png)
 
@@ -9,7 +9,7 @@ GpuInstance合批的可摆动的草,支持设置草颜色
 
 ## demo使用
 
-EditRes\Scene\DemoEdit 编辑草 
+EditRes\Scene\DemoEdit 编辑草
 
 Scene\Demo 运行实例
 
