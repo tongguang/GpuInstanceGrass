@@ -32,7 +32,7 @@ namespace GupInstanceGrass
 
         public string GrassDataDir = "Assets/3-GpuInstanceGrass/GrassData";
 
-        public string GrassDataFileName = "grass_data";
+        public string GrassDataFileName = "GrassData";
 
 
         private void Awake()
