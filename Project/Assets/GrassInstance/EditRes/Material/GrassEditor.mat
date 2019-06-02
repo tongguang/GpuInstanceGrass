@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Grass-Editor
+  m_Name: GrassEditor
   m_Shader: {fileID: 4800000, guid: c3716effc9ee99048b6ec1537dcd24a5, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4

@@ -49,7 +49,7 @@ namespace GupInstanceGrass.Editor
                 }
                 if (_GrassPrefab.objectReferenceValue != null && _IsRayHit)
                 {
-                    var go = new GameObject("grass_group");
+                    var go = new GameObject("GrassGroup");
                     go.transform.SetParent(mono.transform);
                     var props = new MaterialPropertyBlock();
                     props.SetColor("_Color", _GrassColor.colorValue);
