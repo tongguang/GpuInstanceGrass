@@ -73,7 +73,7 @@ Material:
     - _SrcBlend: 1
     - _SwayMax: 0.05
     - _UVSec: 0
-    - _YOffset: 0
+    - _YOffset: 0.1
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}

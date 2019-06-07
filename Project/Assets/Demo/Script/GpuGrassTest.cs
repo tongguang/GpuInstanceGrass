@@ -15,14 +15,14 @@ namespace GupInstanceGrass.Demo
         {
             _Transform = transform;
 
+            GrassInstanceObj.SetGrassLevel(2);
             GrassInstanceObj.SetMapGrassData(GrassDataInfo);
-            GrassInstanceObj.SetGrassLevel(1);
         }
 
         // Update is called once per frame
         void Update()
         {
-            GrassInstanceObj.SetRolePosition(_Transform.position.x, _Transform.position.z);
+            GrassInstanceObj.SetRolePosition(_Transform.position.x, _Transform.position.y, _Transform.position.z);
         }
     }
 }

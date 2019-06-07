@@ -1,6 +1,6 @@
 ﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
 
-Shader "LearnShader/Grass-1" {
+Shader "LearnShader/Grass-2" {
 	Properties{
 		_Color("Color", Color) = (1,1,1,1)
 		_MainTex("MainTex", 2D) = "white" {}
@@ -9,6 +9,8 @@ Shader "LearnShader/Grass-1" {
 		_Rigidness("Rigidness", Range(1,50)) = 25
 		_SwayMax("Sway Max", Range(0, 0.1)) = .005
 		_YOffset("Y offset", float) = 0.5
+		_MaxWidth("Max Displacement Width", Range(0, 2)) = 0.1
+        _Radius("Radius", Range(0,5)) = 1
 	}
 
 	SubShader
@@ -47,6 +49,7 @@ Shader "LearnShader/Grass-1" {
 				UNITY_VERTEX_INPUT_INSTANCE_ID
 			};
 
+
 			sampler2D _MainTex;
 			UNITY_INSTANCING_BUFFER_START(Props)
                 UNITY_DEFINE_INSTANCED_PROP(fixed4, _Color)
@@ -55,7 +58,11 @@ Shader "LearnShader/Grass-1" {
 				UNITY_DEFINE_INSTANCED_PROP(float, _Rigidness)
 				UNITY_DEFINE_INSTANCED_PROP(float, _SwayMax)
 				UNITY_DEFINE_INSTANCED_PROP(float, _YOffset)
+				UNITY_DEFINE_INSTANCED_PROP(float, _MaxWidth)
+				UNITY_DEFINE_INSTANCED_PROP(float, _Radius)
             UNITY_INSTANCING_BUFFER_END(Props)
+
+			uniform float3 _RolePosition;
 
 			v2f vert(appdata_t IN)
 			{
@@ -75,11 +82,20 @@ Shader "LearnShader/Grass-1" {
 				float rigidness = UNITY_ACCESS_INSTANCED_PROP(Props, _Rigidness);
 				float swayMax = UNITY_ACCESS_INSTANCED_PROP(Props, _SwayMax);
 				float yOffset = UNITY_ACCESS_INSTANCED_PROP(Props, _YOffset);
+				float MaxWidth = UNITY_ACCESS_INSTANCED_PROP(Props, _MaxWidth);
+				float Radius = UNITY_ACCESS_INSTANCED_PROP(Props, _Radius);
+
 				float3 wpos = mul(unity_ObjectToWorld, IN.vertex).xyz;// world position
 				float x = sin(wpos.x / rigidness + (_Time.x * speed)) *(IN.vertex.y - yOffset) * 5;// x axis movements
 				float z = sin(wpos.z / rigidness + (_Time.x * speed)) *(IN.vertex.y - yOffset) * 5;// z axis movements
 				IN.vertex.x += step(0,IN.vertex.y - yOffset) * x * swayMax;// apply the movement if the vertex's y above the YOffset
 				IN.vertex.z += step(0,IN.vertex.y - yOffset) * z * swayMax;
+
+				float3 dis = distance(_RolePosition, wpos);
+				float3 radius = 1 - saturate(dis /Radius);
+				float3 sphereDisp = wpos - _RolePosition;
+				sphereDisp *= radius;
+				IN.vertex.xz += clamp(sphereDisp.xz * step(yOffset, IN.vertex.y), -MaxWidth, MaxWidth);
 
 				// billboard
 				float3 viewerLocal = mul(unity_WorldToObject, float4(_WorldSpaceCameraPos, 1));

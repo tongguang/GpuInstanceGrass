@@ -56,5 +56,6 @@ MonoBehaviour:
   _GrassMaterialList:
   - {fileID: 2100000, guid: f09b90a7fdb50af40b84aef33c088f24, type: 2}
   - {fileID: 2100000, guid: e897923d1641b204c831b02f1df73cab, type: 2}
+  - {fileID: 2100000, guid: 78615cdbdd3eb6a4eb050ebaaae7c294, type: 2}
   _CurMesh: {fileID: 4300000, guid: ade3f1ef004008c42b4e1e24ebf139a9, type: 2}
   _CombineTexture: {fileID: 0}

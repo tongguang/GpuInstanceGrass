@@ -4,10 +4,10 @@ Shader "LearnShader/Grass-Editor" {
 	Properties{
 		_Color("Color", Color) = (1,1,1,1)
 		_MainTex("MainTex", 2D) = "white" {}
-		_Speed ("MoveSpeed", Range(20,50)) = 25 // speed of the swaying
-		_Rigidness("Rigidness", Range(1,50)) = 25 // lower makes it look more "liquid" higher makes it look rigid
-		_SwayMax("Sway Max", Range(0, 0.1)) = .005 // how far the swaying goes
-		_YOffset("Y offset", float) = 0.5// y offset, below this is no animation
+		_Speed ("MoveSpeed", Range(20,50)) = 25
+		_Rigidness("Rigidness", Range(1,50)) = 25
+		_SwayMax("Sway Max", Range(0, 0.1)) = .005
+		_YOffset("Y offset", float) = 0.5
 	}
 
 	SubShader

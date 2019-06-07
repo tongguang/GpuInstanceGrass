@@ -5,10 +5,6 @@ Shader "LearnShader/Grass-0" {
 		_Color("Color", Color) = (1,1,1,1)
 		_MainTex("MainTex", 2D) = "white" {}
 		_UV0Offset ("UV0Offset", Vector) = (0,0,1,1)
-		_Speed ("MoveSpeed", Range(20,50)) = 25 // speed of the swaying
-		_Rigidness("Rigidness", Range(1,50)) = 25 // lower makes it look more "liquid" higher makes it look rigid
-		_SwayMax("Sway Max", Range(0, 0.1)) = .005 // how far the swaying goes
-		_YOffset("Y offset", float) = 0.5// y offset, below this is no animation
 	}
 
 	SubShader
@@ -51,10 +47,6 @@ Shader "LearnShader/Grass-0" {
 			UNITY_INSTANCING_BUFFER_START(Props)
                 UNITY_DEFINE_INSTANCED_PROP(fixed4, _Color)
                 UNITY_DEFINE_INSTANCED_PROP(fixed4, _UV0Offset)
-				UNITY_DEFINE_INSTANCED_PROP(float, _Speed)
-				UNITY_DEFINE_INSTANCED_PROP(float, _Rigidness)
-				UNITY_DEFINE_INSTANCED_PROP(float, _SwayMax)
-				UNITY_DEFINE_INSTANCED_PROP(float, _YOffset)
             UNITY_INSTANCING_BUFFER_END(Props)
 
 			v2f vert(appdata_t IN)
@@ -70,16 +62,6 @@ Shader "LearnShader/Grass-0" {
 				// float4 viewPos = mul(UNITY_MATRIX_V, worldCoord) + float4(vpos, 0);
 				// float4 outPos = mul(UNITY_MATRIX_P, viewPos);
 				// o.vertex = outPos;
-
-				// float speed = UNITY_ACCESS_INSTANCED_PROP(Props, _Speed);
-				// float rigidness = UNITY_ACCESS_INSTANCED_PROP(Props, _Rigidness);
-				// float swayMax = UNITY_ACCESS_INSTANCED_PROP(Props, _SwayMax);
-				// float yOffset = UNITY_ACCESS_INSTANCED_PROP(Props, _YOffset);
-				// float3 wpos = mul(unity_ObjectToWorld, IN.vertex).xyz;// world position
-				// float x = sin(wpos.x / rigidness + (_Time.x * speed)) *(IN.vertex.y - yOffset) * 5;// x axis movements
-				// float z = sin(wpos.z / rigidness + (_Time.x * speed)) *(IN.vertex.y - yOffset) * 5;// z axis movements
-				// IN.vertex.x += step(0,IN.vertex.y - yOffset) * x * swayMax;// apply the movement if the vertex's y above the YOffset
-				// IN.vertex.z += step(0,IN.vertex.y - yOffset) * z * swayMax;
 
 				// billboard
 				float3 viewerLocal = mul(unity_WorldToObject, float4(_WorldSpaceCameraPos, 1));

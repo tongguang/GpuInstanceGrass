@@ -33,7 +33,7 @@ namespace GupInstanceGrass
 
         int GrassLevel = 0;
 
-        Vector2 RolePosition = Vector2.zero;
+        Vector3 RolePosition = Vector3.zero;
 
         GrassData GrassDataInfo;
 
@@ -57,6 +57,7 @@ namespace GupInstanceGrass
         private int _ColorPropID = Shader.PropertyToID("_Color");
         private int _UV0OffsetPropID = Shader.PropertyToID("_UV0Offset");
         private int _MainTexPropID = Shader.PropertyToID("_MainTex");
+        private int _RolePositionPropID = Shader.PropertyToID("_RolePosition");
 
 
         //    public Vector2 testPos;
@@ -109,12 +110,14 @@ namespace GupInstanceGrass
             }
         }
 
-        public void SetRolePosition(float x, float z)
+        public void SetRolePosition(float x, float y, float z)
         {
-            if (Math.Abs(RolePosition.x - x) > 0.001f || Math.Abs(RolePosition.y - z) > 0.001f)
+            if (Math.Abs(RolePosition.x - x) > 0.001f || Math.Abs(RolePosition.y - y) > 0.001f || Math.Abs(RolePosition.z - z) > 0.001f)
             {
                 RolePosition.x = x;
-                RolePosition.y = z;
+                RolePosition.y = y;
+                RolePosition.z = z;
+                Shader.SetGlobalVector(_RolePositionPropID, RolePosition);
                 _ShowBlockDirty = true;
             }
         }
@@ -155,7 +158,7 @@ namespace GupInstanceGrass
             _ShowBlockDirty = false;
 
             int blockX4, blockY4;
-            PosToBlock(RolePosition.x, RolePosition.y, out blockX4, out blockY4);
+            PosToBlock(RolePosition.x, RolePosition.z, out blockX4, out blockY4);
             if (_CurShowBlocks[4].x == blockX4 && _CurShowBlocks[4].y == blockY4)
             {
                 return;
