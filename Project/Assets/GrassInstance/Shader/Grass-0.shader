@@ -12,7 +12,7 @@ Shader "LearnShader/Grass-0" {
 		Tags
 		{
 			"Queue"="Transparent"
-			"RenderType"="Opaque"
+			"RenderType"="Transparent"
 			"IgnoreProject"="True"
 			"DisableBatching" = "True"
 		}
